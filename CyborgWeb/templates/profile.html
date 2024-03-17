@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+     <title>{{ setting.title }}</title> 
+      <link rel="icon" href="{{ setting.icon.url }}"> 
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-cyborg-gaming.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+<!--
+
+TemplateMo 579 Cyborg Gaming
+
+https://templatemo.com/tm-579-cyborg-gaming
+
+-->
+  </head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                            <!-- ***** Logo Start ***** -->
+                    <logo>
+                        <img src="{{ setting.logo.url }}" alt="Logo">
+                        </logo>
+                    <link rel="logo" href="{{ setting.logo.url }}">
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Search End ***** -->
+                    <div class="search-input">
+                      <form id="search" action="#">
+                          <label for='searchText'></label><input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                        <i class="fa fa-search"></i>
+                      </form>
+                    </div>
+                    <!-- ***** Search End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                        <li><a href="{% url 'discover' %}" class="active">Discover</a></li>
+                        <li><a href="{% url 'news' %}">News</a></li>
+{#                         <li><a href="{% url 'indie' %}">Indie</a></li>#}
+                        <li><a href="{% url 'profile' %}">Profile <img src="{% static 'assets/images/profile-header.jpg' %}" alt=""></a></li>
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+ <!-- ***** Banner Start ***** -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="main-profile">
+            <!-- Profile info section -->
+            <div class="row">
+                <div class="col-lg-4">
+                    <img src="{{ user_profile.avatar.url }}" alt="Profile Picture" style="border-radius: 23px;">
+                </div>
+                <div class="col-lg-4 align-self-center">
+                    <div class="main-info header-text">
+                        <span>Offline</span>
+                        <h4>{{ user_profile.user.username }}</h4>
+                        <p>{{ user_profile.bio }}</p>
+                        <div class="main-border-button">
+                            <a href="#">Start Live Stream</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 align-self-center">
+                    <ul>
+                        <li>Games Downloaded <span>{{ user_profile.games_downloaded }}</span></li>
+                        <li>Friends Online <span>{{ user_profile.friends_online }}</span></li>
+                        <li>Live Streams <span>None</span></li>
+                        <li>Clips <span>{{ user_profile.clips }}</span></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Your Most Popular Clips section -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="clips">
+                        <div class="row">
+                            <!-- Render your clips here -->
+                            {% for clip in clips %}
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="item">
+                                    <div class="thumb">
+                                        <img src="{{ clip.clip_image.url }}" alt="Clip Image" style="border-radius: 23px;">
+                                        <a href="{{ clip.clip_url }}" target="_blank"><i class="fa fa-play"></i></a>
+                                    </div>
+                                    <div class="down-content">
+                                        <h4>{{ clip.clip_title }}</h4>
+                                        <span><i class="fa fa-eye"></i>18k</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Banner End ***** -->
+{#<!-- ***** Profile Comments Start ***** -->#}
+{#<div class="profile-comments">#}
+{#  <div class="col-lg-12">#}
+{#    <div class="heading-section">#}
+{#      <h4><em>Recent</em> Comments</h4>#}
+{#    </div>#}
+{#  </div>#}
+{#  <div class="row">#}
+{#    <!-- Recent comments here -->#}
+{#    {% for comment in comments %}#}
+{#    <div class="col-lg-12">#}
+{#      <div class="item">#}
+{#        <p>{{ comment.text }}</p>#}
+{#        <span>By {{ comment.user.username }} on {{ comment.created_at }}</span>#}
+{#      </div>#}
+{#    </div>#}
+{#    {% endfor %}#}
+{#  </div>#}
+{#</div>#}
+{#<!-- ***** Profile Comments End ***** -->#}
+
+
+
+
+
+
+
+
+          <!-- ***** Gaming Library Start ***** -->
+          <div class="gaming-library profile-library">
+            <div class="col-lg-12">
+              <div class="heading-section">
+                <h4><em>Your Gaming</em> Library</h4>
+              </div>
+              <div class="item">
+                <ul>
+                  <li><img src="{% static 'assets/images/game-01.jpg' %}" alt="" class="templatemo-item"></li>
+                  <li><h4>Dota 2</h4><span>Sandbox</span></li>
+                  <li><h4>Date Added</h4><span>24/08/2036</span></li>
+                  <li><h4>Hours Played</h4><span>634 H 22 Mins</span></li>
+                  <li><h4>Currently</h4><span>Downloaded</span></li>
+                  <li><div class="main-border-button border-no-active"><a href="#">Downloaded</a></div></li>
+                </ul>
+              </div>
+              <div class="item">
+                <ul>
+                  <li><img src="{% static 'assets/images/game-02.jpg' %}" alt="" class="templatemo-item"></li>
+                  <li><h4>Fortnite</h4><span>Sandbox</span></li>
+                  <li><h4>Date Added</h4><span>22/06/2036</span></li>
+                  <li><h4>Hours Played</h4><span>745 H 22 Mins</span></li>
+                  <li><h4>Currently</h4><span>Downloaded</span></li>
+                  <li><div class="main-border-button border-no-active"><a href="#">Downloaded</a></div></li>
+                </ul>
+              </div>
+              <div class="item last-item">
+                <ul>
+                  <li><img src="{% static 'assets/images/game-03.jpg' %}" alt="" class="templatemo-item"></li>
+                  <li><h4>Stardew Valley</h4><span>Pixel</span></li>
+                  <li><h4>Date Added</h4><span>21/04/2022</span></li>
+                  <li><h4>Hours Played</h4><span>158 H 46 Mins</span></li>
+                  <li><h4>Currently</h4><span>Downloaded</span></li>
+                  <li><div class="main-border-button border-no-active"><a href="#">Downloaded</a></div></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- ***** Gaming Library End ***** -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved. 
+          
+          <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a>  Distributed By <a href="https://themewagon.com" target="_blank" >ThemeWagon</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+  <script src="{% static 'assets/js/isotope.min.js' %}"></script>
+  <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+  <script src="{% static 'assets/js/tabs.js' %}"></script>
+  <script src="{% static 'assets/js/popup.js' %}"></script>
+  <script src="{% static 'assets/js/custom.js' %}"></script>
+
+
+  </body>
+
+</html>

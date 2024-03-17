@@ -1,0 +1,251 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+     <title>{{ setting.title }}</title> 
+      <link rel="icon" href="{{ setting.icon.url }}"> 
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-cyborg-gaming.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+<!--
+
+TemplateMo 579 Cyborg Gaming
+
+https://templatemo.com/tm-579-cyborg-gaming
+
+-->
+  </head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                                 <!-- ***** Logo Start ***** -->
+                                <logo>
+                                    <img src="{{ setting.logo.url }}" alt="Logo">
+                                </logo>
+                                <link rel="logo" href="{{ setting.logo.url }}">
+                                <!-- ***** Logo End ***** -->
+                    <!-- ***** Search End ***** -->
+                    <div class="search-input">
+                      <form id="search" action="#">
+                          <label for='searchText'></label><input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                        <i class="fa fa-search"></i>
+                      </form>
+                    </div>
+                    <!-- ***** Search End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                        <li><a href="{% url 'discover' %}" class="active">Discover</a></li>
+                        <li><a href="{% url 'news' %}">News</a></li>
+{#                        <li><a href="{% url 'indie' %}">Indie</a></li>#}
+                       <li><a href="{% url 'profile' %}">Profile <img src="{% static 'assets/images/profile-header.jpg' %}" alt=""></a></li>
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+                   <!-- ***** Featured Games Start ***** -->
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="featured-games header-text">
+                  <div class="heading-section">
+                    <h4><em>Featured</em> Games</h4>
+                  </div>
+                  <div class="owl-features owl-carousel">
+                    <!-- Slider items here -->
+                    {% for game in featured_games %}
+                    <div class="item">
+                      <div class="thumb">
+                        <img src="{{ game.image.url }}" alt="">
+                        <div class="hover-effect">
+                          <h6>{{ game.streaming }}</h6>
+                        </div>
+                      </div>
+                      <h4>{{ game.title }}<br><span>{{ game.downloads|filesizeformat }}</span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> {{ game.rating }}</li>
+                        <li><i class="fa fa-download"></i> {{ game.downloads }}</li>
+                      </ul>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="top-downloaded">
+                  <div class="heading-section">
+                    <h4><em>Top</em> Downloaded</h4>
+                  </div>
+                  <ul>
+                    <!-- Top downloaded games here -->
+                    {% for game in top_downloaded_games %}
+                    <li>
+                      <img src="{{ game.image.url }}" alt="" class="templatemo-item">
+                      <h4>{{ game.title }}</h4>
+                      <h6>{{ game.category }}</h6>
+                      <span><i class="fa fa-star" style="color: yellow;"></i> {{ game.rating }}</span>
+                      <span><i class="fa fa-download" style="color: #ec6090;"></i> {{ game.downloads|filesizeformat }}</span>
+                      <div class="download">
+                        <a href="#"><i class="fa fa-download"></i></a>
+                      </div>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  <div class="text-button">
+                    <a href="{% url 'discover' %}">View All Games</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ***** Featured Games End ***** -->
+        <!-- ***** Live Stream Start ***** -->
+<div class="live-stream">
+  <div class="col-lg-12">
+    <div class="heading-section">
+      <h4><em>Recent</em> Game Trailers</h4>
+    </div>
+  </div>
+  <div class="row">
+    <!-- Recent game trailers here -->
+    {% for trailer_games in trailer_games %}
+    <div class="col-lg-3 col-sm-6">
+      <div class="item">
+        <div class="thumb">
+          <img src="{{ trailer_games.trailer_image.url }}" alt="">
+          <div class="hover-effect">
+            <div class="content">
+              <div class="live">
+                <a href="#">Live</a>
+              </div>
+              <ul>
+                <li><a href="#"><i class="fa fa-eye"></i> 1.2K</a></li>
+                <li><a href="#"><i class="fa fa-gamepad"></i> {{ trailer_games.title }}</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="down-content">
+          <div class="avatar">
+            <img src="{% static 'assets/images/avatar-02.jpg' %}" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
+          </div>
+          <span><i class="fa fa-check"></i> {{ trailer_games.developer }}</span>
+          <h4>{{ trailer_games.title }}</h4>
+        </div> 
+      </div>
+    </div>
+    {% endfor %}
+    <div class="col-lg-12">
+      <div class="main-button">
+        <a href="{% url 'news' %}">Discover All Game News</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ***** Live Stream End ***** -->
+<!-- ***** Start Stream Start ***** -->
+<div class="start-stream">
+  <div class="col-lg-12">
+    <div class="heading-section">
+      <h4><em>How To Expand Your</em> Collection</h4>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="comment-section">
+          <h4>Leave a Comment</h4>
+          <form action="{% url 'comment' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="comment" placeholder="Your Comment" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ***** Start Stream End ***** -->
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved. 
+          
+          <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a> Distributed By <a href="https://themewagon.com" target="_blank" >ThemeWagon</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+  <script src="{% static 'assets/js/isotope.min.js' %}"></script>
+  <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+  <script src="{% static 'assets/js/tabs.js' %}"></script>
+  <script src="{% static 'assets/js/popup.js' %}"></script>
+  <script src="{% static 'assets/js/custom.js' %}"></script>
+
+
+  </body>
+
+</html>
